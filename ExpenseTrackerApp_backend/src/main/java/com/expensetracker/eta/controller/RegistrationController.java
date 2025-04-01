@@ -5,6 +5,7 @@ import com.expensetracker.eta.service.MyUserDetailsService;
 import com.expensetracker.eta.util.error.UserAlreadyExistException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -21,6 +22,7 @@ public class RegistrationController {
 
     @Autowired
     private MyUserDetailsService userService;
+
     private ModelAndView mav = new ModelAndView("register");
 
     @GetMapping("/register")
@@ -35,7 +37,7 @@ public class RegistrationController {
             @ModelAttribute("user") @Valid UserDto userDto,
             HttpServletRequest request,
             Errors errors) {
-
+        System.out.println("I am being really gay!");
         try {
             User registered = userService.registerNewUserAccount(userDto);
         } catch (UserAlreadyExistException uaeEx) {
@@ -44,5 +46,6 @@ public class RegistrationController {
         }
 
         // rest of the implementation
+        return mav;
     }
 }

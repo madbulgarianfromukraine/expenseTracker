@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@Table(name = "auth_data")
 public class User {
 
     @Id
@@ -17,9 +18,11 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Column(name = "password_hash")
     private String hashedPassword;
 
-    private byte[] randomSalt;
+    @Column(name = "password_salt")
+    private String randomSalt;
 
     @Column(nullable = false, unique = true)
     private String email;
